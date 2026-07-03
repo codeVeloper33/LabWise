@@ -1,0 +1,48 @@
+services:
+  # ── Flask Backend ──────────────────────────────────────────────
+  - type: web
+    name: labwise3-backend
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn "app.main:create_app()" --bind 0.0.0.0:$PORT --workers 2 --timeout 120
+    envVars:
+      - key: DATABASE_URL
+        sync: false          # You will paste this from Neon after setup
+      - key: JWT_SECRET_KEY
+        generateValue: true  # Render auto-generates a secure secret
+      - key: JWT_EXPIRY_HOURS
+        value: 24
+      - key: FLASK_ENV
+        value: production
+      - key: FLASK_DEBUG
+        value: "False"
+      - key: MAIL_SERVER
+        value: smtp.gmail.com
+      - key: MAIL_PORT
+        value: "587"
+      - key: MAIL_USE_TLS
+        value: "True"
+      - key: MAIL_USERNAME
+        sync: false          # Paste your Gmail address
+      - key: MAIL_PASSWORD
+        sync: false          # Paste your Gmail App Password
+      - key: MAIL_DEFAULT_SENDER
+        sync: false          # Same as MAIL_USERNAME
+      - key: FLW_PUBLIC_KEY
+        sync: false          # Paste from Flutterwave dashboard
+      - key: FLW_SECRET_KEY
+        sync: false          # Paste from Flutterwave dashboard
+      - key: FLW_WEBHOOK_HASH
+        sync: false          # Any secret string you choose
+
+  # ── Frontend Static Site ───────────────────────────────────────
+  - type: web
+    name: labwise3-frontend
+    runtime: static
+    rootDir: frontend
+    staticPublishPath: .
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /pages/index.html

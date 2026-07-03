@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LabWise — Create Account</title>
+  <link rel="stylesheet" href="../css/global.css"/>
+  <link rel="stylesheet" href="../css/auth.css"/>
+</head>
+<body class="auth-body">
+
+  <div class="auth-wrapper">
+
+    <!-- ── Left panel ── -->
+    <div class="auth-left">
+      <a href="index.html" class="brand">
+        <div class="brand-icon">⚗️</div>
+        <h1 class="brand-name">LabWise</h1>
+        <p class="brand-tagline">Virtual Physics Laboratory</p>
+      </a>
+
+      <div class="auth-illustration">
+        <!-- Spring / Hooke's Law SVG -->
+        <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+          <rect x="105" y="40" width="90" height="12" rx="5" fill="#4ade80"/>
+          <rect x="136" y="52" width="28" height="8" rx="4" fill="#64748b"/>
+          <path d="M150 60 L130 76 L170 94 L130 112 L170 130 L130 148 L170 166 L130 184 L150 200"
+                stroke="#22d3ee" stroke-width="3" fill="none" stroke-linecap="round"
+                style="filter:drop-shadow(0 0 6px rgba(34,211,238,0.4))"/>
+          <rect x="118" y="200" width="64" height="46" rx="7"
+                fill="#3b82f6" stroke="#2563eb" stroke-width="2"
+                style="filter:drop-shadow(0 0 10px rgba(59,130,246,0.4))"/>
+          <text x="150" y="230" text-anchor="middle" fill="white"
+                font-size="15" font-family="JetBrains Mono" font-weight="600">200g</text>
+        </svg>
+      </div>
+
+      <div class="auth-features">
+        <div class="feature-item">
+          <span class="feature-icon">⏱️</span>
+          <span>Interactive stopwatch</span>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">📐</span>
+          <span>Realistic error simulation</span>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">🎓</span>
+          <span>WAEC &amp; NECO ready</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Right panel ── -->
+    <div class="auth-right">
+      <div class="auth-card">
+
+        <div class="auth-header">
+          <h2>Create your account</h2>
+          <p>Join LabWise — free to get started</p>
+        </div>
+
+        <form id="signup-form" class="auth-form" novalidate>
+
+          <div class="form-group">
+            <label for="username">Username</label>
+            <div class="input-wrapper">
+              <span class="input-icon">👤</span>
+              <input type="text" id="username" name="username"
+                     placeholder="e.g. chukwuemeka"
+                     autocomplete="username" required/>
+            </div>
+            <span class="field-error" id="username-error"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <div class="input-wrapper">
+              <span class="input-icon">✉️</span>
+              <input type="email" id="email" name="email"
+                     placeholder="you@example.com"
+                     autocomplete="email" required/>
+            </div>
+            <span class="field-error" id="email-error"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="phone">
+              Phone number
+              <span class="optional-tag">(optional)</span>
+            </label>
+            <div class="input-wrapper">
+              <span class="input-icon">📱</span>
+              <input type="tel" id="phone" name="phone"
+                     placeholder="08012345678"
+                     autocomplete="tel"/>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <div class="input-wrapper">
+              <span class="input-icon">🔒</span>
+              <input type="password" id="password" name="password"
+                     placeholder="At least 6 characters"
+                     autocomplete="new-password" required/>
+              <button type="button" class="toggle-password"
+                      id="toggle-password" aria-label="Show/hide password">👁️</button>
+            </div>
+            <span class="field-error" id="password-error"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="confirm-password">Confirm password</label>
+            <div class="input-wrapper">
+              <span class="input-icon">🔒</span>
+              <input type="password" id="confirm-password"
+                     name="confirm-password"
+                     placeholder="Repeat your password"
+                     autocomplete="new-password" required/>
+            </div>
+            <span class="field-error" id="confirm-password-error"></span>
+          </div>
+
+          <div id="form-error" class="form-error hidden"></div>
+
+          <button type="submit" class="btn-primary btn-full" id="signup-btn">
+            <span class="btn-text">Create Account</span>
+            <span class="btn-loader hidden">⏳ Creating account…</span>
+          </button>
+
+        </form>
+
+        <div class="auth-footer">
+          <p>Already have an account? <a href="login.html">Sign in</a></p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script src="../js/utils/storage.js"></script>
+  <script src="../js/utils/router.js"></script>
+  <script src="../js/utils/validator.js"></script>
+  <script src="../js/api/authApi.js"></script>
+  <script src="../js/auth/signup.js"></script>
+</body>
+</html>

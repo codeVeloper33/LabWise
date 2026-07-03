@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LabWise — Practical Report</title>
+  <link rel="stylesheet" href="../css/global.css"/>
+  <link rel="stylesheet" href="../css/sidebar.css"/>
+  <link rel="stylesheet" href="../css/graph-report.css"/>
+</head>
+<body>
+
+  <div class="sidebar" id="sidebar"></div>
+
+  <div class="main-content">
+
+    <!-- ── Topbar ── -->
+    <div class="report-topbar">
+      <div class="report-topbar-left">
+        <button class="lab-back-btn" onclick="history.back()">← Graph</button>
+        <h1>Practical Report</h1>
+      </div>
+      <div class="report-topbar-actions">
+        <button class="btn-secondary" id="print-btn" onclick="window.print()">
+          🖨️ Print / Save PDF
+        </button>
+        <a href="create-experiment.html" class="btn-primary">
+          ➕ New Experiment
+        </a>
+      </div>
+    </div>
+
+    <!-- ── Locked overlay (free tier) ── -->
+    <div class="report-locked hidden" id="report-locked" style="margin:28px;">
+      <div class="report-locked-icon">🔒</div>
+      <h2>Full Report — Upgrade Required</h2>
+      <p>
+        The complete WAEC-style practical report is available on Tier 1 and above.
+        Your graph and result are still accessible on the previous page.
+      </p>
+      <a href="upgrade.html" class="btn-primary btn-large">⭐ Upgrade Plan</a>
+    </div>
+
+    <!-- ── Report body (shown for paid tiers) ── -->
+    <div class="report-body" id="report-body">
+
+      <!-- Report header -->
+      <div class="report-header-block">
+        <div class="report-header-left">
+          <h2 id="report-exp-title">—</h2>
+          <p id="report-exp-subtitle">Practical Report</p>
+        </div>
+        <div class="report-header-right">
+          <div>Student: <strong id="rpt-student">—</strong></div>
+          <div>Date: <strong id="rpt-date">—</strong></div>
+          <div>Session: <strong id="rpt-session">—</strong></div>
+        </div>
+      </div>
+
+      <!-- 1. Aim -->
+      <div class="report-section">
+        <div class="report-section-title">① Aim</div>
+        <div class="report-section-body" id="rpt-aim">—</div>
+      </div>
+
+      <!-- 2. Apparatus -->
+      <div class="report-section">
+        <div class="report-section-title">② Apparatus</div>
+        <ul class="report-list" id="rpt-apparatus"></ul>
+      </div>
+
+      <!-- 3. Diagram -->
+      <div class="report-section">
+        <div class="report-section-title">③ Diagram</div>
+        <div class="report-diagram-wrap" id="rpt-diagram"></div>
+      </div>
+
+      <!-- 4. Theory -->
+      <div class="report-section">
+        <div class="report-section-title">④ Theory</div>
+        <div class="report-section-body" id="rpt-theory">—</div>
+        <div class="report-formula-box" id="rpt-formula">—</div>
+        <div class="report-section-body" style="margin-top:8px;font-size:13px;white-space:pre-line;"
+             id="rpt-formula-explained">—</div>
+      </div>
+
+      <!-- 5. Procedure -->
+      <div class="report-section">
+        <div class="report-section-title">⑤ Procedure</div>
+        <ol class="report-list numbered" id="rpt-procedure"></ol>
+      </div>
+
+      <!-- 6. Table of Results -->
+      <div class="report-section">
+        <div class="report-section-title">⑥ Table of Results</div>
+        <div style="overflow-x:auto;">
+          <table class="graph-data-table" style="margin-top:6px;">
+            <thead id="rpt-table-head"></thead>
+            <tbody id="rpt-table-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 7. Graph -->
+      <div class="report-section">
+        <div class="report-section-title">⑦ Graph</div>
+        <canvas id="report-graph-canvas" width="760" height="420"></canvas>
+        <p class="report-graph-caption" id="rpt-graph-caption"></p>
+      </div>
+
+      <!-- 8. Calculation -->
+      <div class="report-section">
+        <div class="report-section-title">⑧ Calculation</div>
+        <div class="calc-steps" id="rpt-calculation"></div>
+      </div>
+
+      <!-- 9. Precautions -->
+      <div class="report-section">
+        <div class="report-section-title">⑨ Precautions</div>
+        <ol class="report-list numbered" id="rpt-precautions"></ol>
+      </div>
+
+      <!-- 10. Sources of Error -->
+      <div class="report-section">
+        <div class="report-section-title">⑩ Sources of Error</div>
+        <ul class="report-list" id="rpt-errors"></ul>
+      </div>
+
+      <!-- 11. Conclusion -->
+      <div class="report-section">
+        <div class="report-section-title">⑪ Conclusion</div>
+        <div class="report-section-body" id="rpt-conclusion">—</div>
+        <div class="report-result-box">
+          <div>
+            <div class="report-result-label" id="rpt-result-label">Result</div>
+            <div class="report-result-uncertainty" id="rpt-result-uncertainty">± —</div>
+          </div>
+          <div class="report-result-value" id="rpt-result-value">—</div>
+        </div>
+      </div>
+
+    </div>
+    <!-- END report-body -->
+
+  </div>
+
+  <script src="../js/utils/storage.js"></script>
+  <script src="../js/utils/router.js"></script>
+  <script src="../js/api/experimentApi.js"></script>
+  <script src="../js/ui/sidebar.js"></script>
+  <script src="../js/ui/report.js"></script>
+</body>
+</html>

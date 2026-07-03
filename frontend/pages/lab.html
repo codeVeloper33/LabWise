@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LabWise — Lab Bench</title>
+  <link rel="stylesheet" href="../css/global.css"/>
+  <link rel="stylesheet" href="../css/sidebar.css"/>
+  <link rel="stylesheet" href="../css/lab.css"/>
+</head>
+<body>
+
+  <div class="sidebar" id="sidebar"></div>
+
+  <div class="main-content">
+
+    <!-- ── Lab topbar ── -->
+    <div class="lab-topbar">
+      <div class="lab-topbar-left">
+        <button class="lab-back-btn" onclick="history.back()">← Back</button>
+        <h1 class="lab-title" id="lab-title">Lab Bench</h1>
+      </div>
+      <div class="lab-trial-badge" id="trial-badge">Trial 1 of 5</div>
+    </div>
+
+    <!-- ── Question panel (persistent, collapsible) ── -->
+    <div class="question-panel" id="question-panel">
+      <div class="question-panel-header" id="question-toggle">
+        <h3>📋 Your Question — stays visible throughout</h3>
+        <span class="question-panel-toggle">▼</span>
+      </div>
+      <div class="question-panel-body">
+        <div class="question-panel-formula" id="q-formula">—</div>
+        <div class="question-panel-text"   id="q-text">Loading question…</div>
+      </div>
+    </div>
+
+    <!-- ── Two-column lab layout ── -->
+    <div class="lab-layout">
+
+      <!-- ══════════════════════════════════════
+           LEFT — Simulation
+      ══════════════════════════════════════ -->
+      <div class="lab-sim-panel">
+
+        <div class="sim-header">
+          <h2 id="sim-title">Simulation</h2>
+          <span class="sim-info-text" id="sim-info">—</span>
+        </div>
+
+        <div class="sim-canvas-wrap">
+
+          <!-- ── PENDULUM SVG ── -->
+          <div class="sim-panel" id="sim-pendulum">
+            <svg viewBox="0 0 400 340" xmlns="http://www.w3.org/2000/svg">
+              <!-- Support bar -->
+              <rect x="40" y="14" width="320" height="14" rx="6"
+                    fill="#1e293b" stroke="#334155" stroke-width="1"/>
+              <!-- Clamp -->
+              <rect x="178" y="14" width="44" height="24" rx="4" fill="#475569"/>
+              <rect x="191" y="36" width="18" height="8"  rx="4" fill="#64748b"/>
+              <!-- Pivot bushing -->
+              <ellipse cx="200" cy="48" rx="10" ry="5" fill="#92400e"/>
+              <!-- String (animated) -->
+              <line id="pend-string"
+                    x1="200" y1="48" x2="200" y2="230"
+                    stroke="#cbd5e1" stroke-width="2.5"/>
+              <!-- Bob (animated) -->
+              <circle id="pend-bob" cx="200" cy="248" r="20"
+                      fill="#4ade80" stroke="#22c55e" stroke-width="2"
+                      style="filter:drop-shadow(0 0 10px rgba(74,222,128,0.5))"/>
+              <!-- Centre equilibrium line -->
+              <line x1="200" y1="48" x2="200" y2="340"
+                    stroke="#4ade80" stroke-width="1"
+                    stroke-dasharray="6,5" opacity="0.15"/>
+              <!-- Arc guide -->
+              <path d="M 148 230 Q 200 268 252 230"
+                    stroke="#4ade80" stroke-width="1" fill="none"
+                    opacity="0.18" stroke-dasharray="4,4"/>
+              <!-- Length dimension line -->
+              <line id="pend-len-line" x1="238" y1="48" x2="238" y2="230"
+                    stroke="#64748b" stroke-width="1" stroke-dasharray="3"/>
+              <text id="pend-len-label" x="243" y="145"
+                    fill="#64748b" font-size="13"
+                    font-family="JetBrains Mono,monospace">L = — cm</text>
+              <!-- Oscillation counter badge -->
+              <rect x="8" y="8" width="128" height="28" rx="6"
+                    fill="rgba(5,12,24,0.85)"/>
+              <text id="osc-display" x="16" y="27"
+                    fill="#4ade80" font-size="12"
+                    font-family="JetBrains Mono,monospace"
+                    font-weight="500">Swings: 0 / —</text>
+            </svg>
+          </div>
+
+          <!-- ── HOOKE'S LAW SVG ── -->
+          <div class="sim-panel" id="sim-hookes">
+            <svg viewBox="0 0 400 360" xmlns="http://www.w3.org/2000/svg">
+              <!-- Ceiling -->
+              <rect x="0" y="0" width="400" height="16" fill="#1e293b"/>
+              <!-- Clamp bracket -->
+              <rect x="148" y="0" width="104" height="28" rx="4" fill="#334155"/>
+              <rect x="188" y="28" width="24" height="8" rx="4" fill="#64748b"/>
+              <!-- Retort stand rod -->
+              <rect x="56"  y="16" width="16" height="340" rx="3" fill="#1e3a5f" stroke="#334155"/>
+              <!-- Ruler markings -->
+              <g fill="#94a3b8" font-size="9" font-family="JetBrains Mono,monospace">
+                <text x="60" y="46" >0</text>
+                <text x="58" y="96" >5</text>
+                <text x="56" y="146">10</text>
+                <text x="56" y="196">15</text>
+                <text x="56" y="246">20</text>
+                <text x="56" y="296">25</text>
+              </g>
+              <g stroke="#334155" stroke-width="1">
+                <line x1="72" y1="42"  x2="78" y2="42"/>
+                <line x1="72" y1="92"  x2="78" y2="92"/>
+                <line x1="72" y1="142" x2="78" y2="142"/>
+                <line x1="72" y1="192" x2="78" y2="192"/>
+                <line x1="72" y1="242" x2="78" y2="242"/>
+                <line x1="72" y1="292" x2="78" y2="292"/>
+              </g>
+              <!-- Spring (built by JS) -->
+              <path id="spring-path" d=""
+                    stroke="#22d3ee" stroke-width="3" fill="none"
+                    stroke-linecap="round"
+                    style="filter:drop-shadow(0 0 4px rgba(34,211,238,0.35))"/>
+              <!-- Pointer line -->
+              <line id="spring-pointer"
+                    x1="82" y1="178" x2="132" y2="178"
+                    stroke="#f59e0b" stroke-width="2" stroke-dasharray="5"/>
+              <!-- Natural length marker -->
+              <line id="natural-marker"
+                    x1="72" y1="72" x2="132" y2="72"
+                    stroke="#4ade80" stroke-width="1.5" stroke-dasharray="4"/>
+              <text id="natural-label" x="136" y="76"
+                    fill="#4ade80" font-size="10"
+                    font-family="JetBrains Mono,monospace">L₀</text>
+              <!-- Mass block -->
+              <rect id="hookes-mass-rect"
+                    x="152" y="178" width="76" height="42" rx="7"
+                    fill="#3b82f6" stroke="#2563eb" stroke-width="2"
+                    opacity="0"/>
+              <text id="hookes-mass-label"
+                    x="190" y="204" text-anchor="middle"
+                    fill="#fff" font-size="13"
+                    font-family="JetBrains Mono,monospace"
+                    font-weight="600" opacity="0">—</text>
+              <!-- Readings display box -->
+              <rect x="248" y="18" width="140" height="68" rx="8"
+                    fill="rgba(5,12,24,0.85)"/>
+              <text x="258" y="38" fill="#94a3b8" font-size="10"
+                    font-family="JetBrains Mono,monospace">New length:</text>
+              <text id="hookes-new-len-display" x="258" y="56"
+                    fill="#22d3ee" font-size="16"
+                    font-family="JetBrains Mono,monospace"
+                    font-weight="600">— cm</text>
+              <text id="hookes-ext-display" x="258" y="74"
+                    fill="#4ade80" font-size="11"
+                    font-family="JetBrains Mono,monospace">ext: — cm</text>
+            </svg>
+          </div>
+
+          <!-- ── MOMENTS SVG ── -->
+          <div class="sim-panel" id="sim-moments">
+            <svg viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg">
+              <!-- Base support -->
+              <rect x="200" y="256" width="80"  height="14" rx="4" fill="#334155"/>
+              <rect x="230" y="154" width="20"  height="106" rx="4" fill="#475569"/>
+              <!-- Pivot triangle -->
+              <polygon id="moments-pivot-tri"
+                       points="240,154 226,178 254,178" fill="#f59e0b"/>
+              <!-- Metre rule group (rotates around pivot) -->
+              <g id="moments-rule-group">
+                <!-- Rule beam -->
+                <rect x="32" y="144" width="416" height="14" rx="7"
+                      fill="#d97706" stroke="#b45309" stroke-width="1.5"/>
+                <!-- Centimetre labels -->
+                <g fill="#78350f" font-size="8"
+                   font-family="JetBrains Mono,monospace">
+                  <text x="38"  y="142">0</text>
+                  <text x="118" y="142">20</text>
+                  <text x="198" y="140">50</text>
+                  <text x="278" y="142">75</text>
+                  <text x="408" y="142">100</text>
+                </g>
+                <!-- Left mass -->
+                <rect id="left-mass-rect"
+                      x="68" y="158" width="44" height="28" rx="5"
+                      fill="#8b5cf6" opacity="0"/>
+                <text id="left-mass-label"
+                      x="90" y="177" text-anchor="middle"
+                      fill="#fff" font-size="11"
+                      font-family="JetBrains Mono,monospace"
+                      font-weight="600" opacity="0">—</text>
+                <!-- Right mass -->
+                <rect id="right-mass-rect"
+                      x="368" y="158" width="44" height="28" rx="5"
+                      fill="#ef4444" opacity="0"/>
+                <text id="right-mass-label"
+                      x="390" y="177" text-anchor="middle"
+                      fill="#fff" font-size="11"
+                      font-family="JetBrains Mono,monospace"
+                      font-weight="600" opacity="0">—</text>
+              </g>
+              <!-- Balance status badge -->
+              <rect x="158" y="8" width="164" height="40" rx="8"
+                    fill="rgba(5,12,24,0.85)"/>
+              <text id="balance-status"
+                    x="240" y="33" text-anchor="middle"
+                    fill="#4ade80" font-size="13"
+                    font-family="JetBrains Mono,monospace"
+                    font-weight="600">⚖️ —</text>
+              <!-- M₁ display -->
+              <rect x="8"   y="230" width="148" height="46" rx="8"
+                    fill="rgba(5,12,24,0.75)"/>
+              <text x="18" y="250" fill="#8b5cf6" font-size="10"
+                    font-family="JetBrains Mono,monospace">Anticlockwise (M₁)</text>
+              <text id="moment1-display"
+                    x="18" y="268"
+                    fill="#c4b5fd" font-size="15"
+                    font-family="JetBrains Mono,monospace"
+                    font-weight="600">— N·m</text>
+              <!-- M₂ display -->
+              <rect x="324" y="230" width="148" height="46" rx="8"
+                    fill="rgba(5,12,24,0.75)"/>
+              <text x="334" y="250" fill="#ef4444" font-size="10"
+                    font-family="JetBrains Mono,monospace">Clockwise (M₂)</text>
+              <text id="moment2-display"
+                    x="334" y="268"
+                    fill="#fca5a5" font-size="15"
+                    font-family="JetBrains Mono,monospace"
+                    font-weight="600">— N·m</text>
+            </svg>
+          </div>
+
+        </div>
+        <!-- END sim-canvas-wrap -->
+
+        <!-- Stopwatch bar (shown for pendulum only) -->
+        <div class="stopwatch-bar hidden" id="stopwatch-bar">
+          <span class="sw-time" id="sw-time">00.00</span>
+          <span class="sw-unit">seconds</span>
+        </div>
+
+      </div>
+      <!-- END lab-sim-panel -->
+
+
+      <!-- ══════════════════════════════════════
+           RIGHT — Input panel + Data table
+      ══════════════════════════════════════ -->
+      <div class="lab-right">
+
+        <!-- Input panel -->
+        <div class="input-panel">
+
+          <div class="input-panel-header">
+            <h3>Record Reading</h3>
+            <span class="trial-indicator">
+              Trial <span id="input-trial-num">1</span>
+            </span>
+          </div>
+
+          <!-- ════ PENDULUM INPUTS (WAEC format) ════ -->
+          <div class="exp-inputs" id="inputs-pendulum">
+
+            <!-- Step 1: Length -->
+            <div class="pend-step-block">
+              <div class="pend-step-title">① Measure &amp; enter length L</div>
+              <div class="input-row">
+                <label>Length — pivot to centre of bob</label>
+                <div class="input-with-unit">
+                  <input type="number" id="pend-length"
+                         placeholder="e.g. 40.0" step="0.1" min="10" max="200"/>
+                  <span class="unit-label">cm</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 2: Release and time -->
+            <div class="pend-step-block">
+              <div class="pend-step-title">② Release bob and time <span id="pend-osc-display">—</span> oscillations</div>
+              <div class="timing-slot-info" id="timing-slot-info">
+                Enter length above, then click Release Bob
+              </div>
+              <button type="button" class="btn-release-bob" id="release-bob-btn">
+                🔵 Release Bob
+              </button>
+              <!-- t is auto-filled by simulation -->
+              <div class="timing-row" style="margin-top:10px;">
+                <span class="timing-label">t (s)</span>
+                <div class="input-with-unit">
+                  <input type="number" id="pend-t"
+                         placeholder="auto-filled by simulation"
+                         step="0.01" readonly
+                         style="background:var(--bg-card);color:var(--cyan);font-weight:600;"/>
+                  <span class="unit-label">s</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 3: Student calculates T and T² -->
+            <div class="pend-step-block">
+              <div class="pend-step-title">③ Calculate T and T² yourself</div>
+              <p class="pend-step-note" style="margin-bottom:10px;">
+                Use the formula: <strong>T = t ÷ N</strong> &nbsp;|&nbsp; <strong>T² = T × T</strong>
+              </p>
+
+              <div class="timing-row">
+                <span class="timing-label">T (s)</span>
+                <div class="input-with-unit">
+                  <input type="number" id="pend-T"
+                         placeholder="= t ÷ N" step="0.01" min="0"/>
+                  <span class="unit-label">s</span>
+                </div>
+              </div>
+
+              <div class="timing-row" style="margin-top:8px;">
+                <span class="timing-label">T² (s²)</span>
+                <div class="input-with-unit">
+                  <input type="number" id="pend-T2"
+                         placeholder="= T × T" step="0.0001" min="0"/>
+                  <span class="unit-label">s²</span>
+                </div>
+              </div>
+
+              <!-- Live validation feedback -->
+              <div id="calc-validation-msg" class="calc-msg" style="margin-top:8px;font-size:12px;"></div>
+            </div>
+
+          </div>
+          <!-- END pendulum inputs -->
+
+          <!-- ════ HOOKE'S LAW INPUTS ════ -->
+          <div class="exp-inputs" id="inputs-hookes">
+            <div class="input-info-row">
+              <span class="input-info-label">Current mass:</span>
+              <span class="input-info-val cyan" id="hookes-current-mass">— g</span>
+            </div>
+            <div class="input-info-row">
+              <span class="input-info-label">Natural length:</span>
+              <span class="input-info-val" id="hookes-natural-display">— cm</span>
+            </div>
+            <div class="input-row">
+              <label>New length of spring</label>
+              <div class="input-with-unit">
+                <input type="number" id="hookes-new-length"
+                       placeholder="e.g. 14.5" step="0.1" min="5" max="80"/>
+                <span class="unit-label">cm</span>
+              </div>
+            </div>
+            <div class="input-info-row">
+              <span class="input-info-label">Extension:</span>
+              <span class="input-info-val green" id="hookes-ext-preview">— cm</span>
+            </div>
+          </div>
+          <!-- END hookes inputs -->
+
+          <!-- ════ MOMENTS INPUTS ════ -->
+          <div class="exp-inputs" id="inputs-moments">
+            <p style="font-size:12px;color:var(--text-muted);">
+              Hang weights, adjust until the rule is level, then record.
+            </p>
+            <div class="moments-sides">
+              <!-- Left side -->
+              <div>
+                <div class="side-label">Left (Anticlockwise)</div>
+                <div class="input-row">
+                  <label>Force F₁ (N)</label>
+                  <div class="input-with-unit">
+                    <input type="number" id="moments-f1"
+                           placeholder="e.g. 3.0" step="0.5" min="0.5" max="15"/>
+                    <span class="unit-label">N</span>
+                  </div>
+                </div>
+                <div class="input-row" style="margin-top:8px;">
+                  <label>Distance d₁ (cm)</label>
+                  <div class="input-with-unit">
+                    <input type="number" id="moments-d1"
+                           placeholder="e.g. 30" step="1" min="5" max="45"/>
+                    <span class="unit-label">cm</span>
+                  </div>
+                </div>
+                <div class="moment-preview">M₁ = <span id="m1-preview">—</span> N·cm</div>
+              </div>
+              <div class="moments-divider">⚖️</div>
+              <!-- Right side -->
+              <div>
+                <div class="side-label">Right (Clockwise)</div>
+                <div class="input-row">
+                  <label>Force F₂ (N)</label>
+                  <div class="input-with-unit">
+                    <input type="number" id="moments-f2"
+                           placeholder="e.g. 2.0" step="0.5" min="0.5" max="15"/>
+                    <span class="unit-label">N</span>
+                  </div>
+                </div>
+                <div class="input-row" style="margin-top:8px;">
+                  <label>Distance d₂ (cm)</label>
+                  <div class="input-with-unit">
+                    <input type="number" id="moments-d2"
+                           placeholder="e.g. 45" step="1" min="5" max="45"/>
+                    <span class="unit-label">cm</span>
+                  </div>
+                </div>
+                <div class="moment-preview">M₂ = <span id="m2-preview">—</span> N·cm</div>
+              </div>
+            </div>
+            <div class="balance-preview hidden" id="balance-preview"></div>
+          </div>
+          <!-- END moments inputs -->
+
+          <div id="input-error" class="form-error hidden"></div>
+
+          <div class="input-actions">
+            <button class="btn-secondary" id="undo-btn" disabled>↩ Undo</button>
+            <button class="btn-primary"   id="record-btn">Record ✓</button>
+          </div>
+
+        </div>
+        <!-- END input-panel -->
+
+        <!-- Data table -->
+        <div class="data-table-panel">
+          <div class="table-panel-header">
+            <h3>📋 Data Table</h3>
+            <span class="readings-count" id="readings-count">0 readings</span>
+          </div>
+          <div class="table-scroll">
+            <table class="data-table" id="data-table">
+              <thead id="table-head"></thead>
+              <tbody id="table-body"></tbody>
+            </table>
+          </div>
+          <div class="finalize-area">
+            <p class="finalize-status" id="finalize-status"></p>
+            <button class="btn-finalize hidden" id="finalize-btn">
+              Finish &amp; View Graph →
+            </button>
+          </div>
+        </div>
+
+      </div>
+      <!-- END lab-right -->
+
+    </div>
+    <!-- END lab-layout -->
+
+  </div>
+  <!-- END main-content -->
+
+  <script src="../js/utils/storage.js"></script>
+  <script src="../js/utils/router.js"></script>
+  <script src="../js/api/experimentApi.js"></script>
+  <script src="../js/experiments/pendulum.js"></script>
+  <script src="../js/experiments/hookesLaw.js"></script>
+  <script src="../js/experiments/moments.js"></script>
+  <script src="../js/ui/sidebar.js"></script>
+  <script src="../js/ui/lab.js"></script>
+</body>
+</html>

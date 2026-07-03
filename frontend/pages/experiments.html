@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LabWise — Experiments</title>
+  <link rel="stylesheet" href="../css/global.css"/>
+  <link rel="stylesheet" href="../css/sidebar.css"/>
+  <link rel="stylesheet" href="../css/pages.css"/>
+</head>
+<body>
+
+  <div class="sidebar" id="sidebar"></div>
+
+  <div class="main-content">
+    <div class="page-header">
+      <h1>Experiments</h1>
+      <p>Browse all available virtual physics practicals.</p>
+    </div>
+
+    <div class="page-content">
+
+      <div class="tier-banner">
+        <div class="tier-banner-text">
+          You're on the <strong id="tier-banner-name">Free</strong> plan —
+          <span id="tier-banner-detail">Simple Pendulum only.</span>
+        </div>
+        <a href="upgrade.html" class="btn-secondary">⭐ Upgrade Plan</a>
+      </div>
+
+      <div class="exp-full-grid" id="exp-grid">
+        <!-- populated by experiments.js -->
+      </div>
+
+    </div>
+  </div>
+
+  <script src="../js/utils/storage.js"></script>
+  <script src="../js/utils/router.js"></script>
+  <script src="../js/api/authApi.js"></script>
+  <script src="../js/api/experimentApi.js"></script>
+  <script src="../js/ui/sidebar.js"></script>
+  <script src="../js/ui/experiments.js"></script>
+</body>
+</html>

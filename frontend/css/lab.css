@@ -1,0 +1,339 @@
+/* ============================================================
+   LabWise — lab.css
+   Active Experiment (Lab Bench) page.
+   Layout: sidebar → main-content → question panel (collapsible)
+           → two-column: simulation | input+table
+   ============================================================ */
+
+/* ── Lab topbar ── */
+.lab-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 28px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.lab-topbar-left {
+  display: flex; align-items: center; gap: 14px;
+}
+.lab-back-btn {
+  font-size: 13px; font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color var(--transition);
+  background: none; border: none; padding: 0;
+}
+.lab-back-btn:hover { color: var(--text-primary); }
+.lab-title {
+  font-size: 17px; font-weight: 700; color: var(--text-primary);
+}
+.lab-trial-badge {
+  font-size: 12px; font-weight: 700;
+  font-family: var(--font-mono);
+  color: var(--blue);
+  background: rgba(59,130,246,0.10);
+  border: 1px solid rgba(59,130,246,0.22);
+  padding: 5px 14px; border-radius: 20px;
+}
+
+/* ── Question panel (collapsible, always on top) ── */
+.question-panel {
+  margin: 14px 28px;
+  border-radius: var(--radius-lg);
+  background: rgba(34,211,238,0.04);
+  border: 1px solid rgba(34,211,238,0.16);
+  overflow: hidden;
+  transition: all 0.25s ease;
+}
+.question-panel-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 13px 20px;
+  cursor: pointer;
+  user-select: none;
+}
+.question-panel-header h3 {
+  font-size: 13px; font-weight: 700;
+  color: var(--cyan);
+  display: flex; align-items: center; gap: 8px;
+}
+.question-panel-toggle {
+  font-size: 12px; color: var(--text-muted);
+  transition: transform 0.25s ease;
+}
+.question-panel.collapsed .question-panel-toggle { transform: rotate(-90deg); }
+
+.question-panel-body {
+  padding: 0 20px 18px;
+  transition: all 0.25s ease;
+}
+.question-panel.collapsed .question-panel-body { display: none; }
+
+.question-panel-formula {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 12px; color: var(--cyan);
+  background: rgba(34,211,238,0.07);
+  border: 1px solid rgba(34,211,238,0.15);
+  border-radius: var(--radius-sm);
+  padding: 5px 12px; margin-bottom: 12px;
+}
+.question-panel-text {
+  font-size: 13px; line-height: 1.85;
+  color: var(--text-secondary);
+  white-space: pre-line;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+/* ── Main lab layout: sim | input+table ── */
+.lab-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  padding: 0 28px 36px;
+  align-items: start;
+}
+
+/* ════════════════════════════════
+   SIMULATION PANEL (left column)
+════════════════════════════════ */
+.lab-sim-panel {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.sim-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 18px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.sim-header h2 { font-size: 14px; font-weight: 700; color: var(--text-primary); }
+.sim-info-text { font-size: 11px; color: var(--text-muted); font-family: var(--font-mono); }
+
+/* SVG canvas */
+.sim-canvas-wrap {
+  background: #050c18;
+  position: relative;
+  overflow: hidden;
+}
+.sim-canvas-wrap svg { width: 100%; height: auto; display: block; }
+.sim-panel { display: none; }
+.sim-panel.active { display: block; }
+
+/* Stopwatch bar (pendulum only) */
+.stopwatch-bar {
+  display: flex; align-items: baseline; justify-content: center;
+  gap: 8px; padding: 10px 16px;
+  background: rgba(5,12,24,0.8);
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+.sw-time {
+  font-family: var(--font-mono);
+  font-size: 30px; font-weight: 700;
+  color: var(--green);
+  letter-spacing: 2px;
+}
+.sw-unit { font-size: 12px; color: var(--text-muted); }
+
+/* ════════════════════════════════
+   RIGHT COLUMN: input + table
+════════════════════════════════ */
+.lab-right { display: flex; flex-direction: column; gap: 16px; }
+
+/* ── Input panel ── */
+.input-panel {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+  display: flex; flex-direction: column; gap: 14px;
+}
+.input-panel-header {
+  display: flex; align-items: center; justify-content: space-between;
+}
+.input-panel-header h3 { font-size: 14px; font-weight: 700; color: var(--text-primary); }
+.trial-indicator {
+  font-size: 11px; font-family: var(--font-mono);
+  color: var(--text-muted);
+  background: rgba(255,255,255,0.04);
+  padding: 4px 10px; border-radius: 20px;
+}
+
+/* Hidden experiment input sections */
+.exp-inputs { display: none; flex-direction: column; gap: 12px; }
+.exp-inputs.active { display: flex; }
+
+/* Input row (label above input) */
+.input-row { display: flex; flex-direction: column; gap: 5px; }
+.input-row label {
+  font-size: 12px; font-weight: 600;
+  color: var(--text-secondary);
+}
+
+/* Info row (label: value, no input) */
+.input-info-row {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 13px; padding: 6px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.input-info-label { color: var(--text-muted); }
+.input-info-val    { color: var(--text-primary); font-weight: 700; font-family: var(--font-mono); }
+.input-info-val.cyan  { color: var(--cyan); }
+.input-info-val.green { color: var(--green); }
+
+/* ── Pendulum-specific inputs ── */
+.pend-step-block {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 13px 15px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.pend-step-title {
+  font-size: 11px; font-weight: 700;
+  color: var(--blue); text-transform: uppercase; letter-spacing: 0.8px;
+}
+.pend-step-note { font-size: 11px; color: var(--text-muted); font-style: italic; }
+
+.timing-slot-info {
+  padding: 9px 13px;
+  background: rgba(34,211,238,0.07);
+  border: 1px solid rgba(34,211,238,0.18);
+  border-radius: var(--radius-sm);
+  font-size: 12px; font-weight: 600; color: var(--cyan);
+  text-align: center;
+}
+
+.btn-release-bob {
+  width: 100%; padding: 12px;
+  background: linear-gradient(135deg,#1d4ed8,#2563eb);
+  color: #fff; border: none; border-radius: var(--radius-md);
+  font-size: 14px; font-weight: 700;
+  cursor: pointer; transition: all 0.2s ease;
+}
+.btn-release-bob:hover:not(:disabled) {
+  background: linear-gradient(135deg,#1e40af,#1d4ed8);
+  box-shadow: 0 4px 16px rgba(37,99,235,0.4);
+}
+.btn-release-bob:disabled { opacity: 0.55; cursor: not-allowed; }
+
+.timings-group { display: flex; flex-direction: column; gap: 8px; }
+.timing-row { display: flex; align-items: center; gap: 10px; }
+.timing-label {
+  font-size: 13px; font-weight: 700;
+  font-family: var(--font-mono); color: var(--text-muted); min-width: 24px;
+}
+.timings-group input[readonly] {
+  background: rgba(74,222,128,0.05);
+  border-color: rgba(74,222,128,0.18);
+  color: var(--green);
+  font-weight: 600; font-family: var(--font-mono);
+  cursor: default;
+}
+
+/* ── Moments-specific ── */
+.moments-sides {
+  display: grid; grid-template-columns: 1fr auto 1fr; gap: 10px;
+  align-items: start;
+}
+.side-label {
+  font-size: 11px; font-weight: 700; color: var(--text-muted);
+  text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;
+}
+.moments-divider {
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; color: var(--text-muted); padding-top: 22px;
+}
+.moment-preview {
+  font-size: 11px; font-family: var(--font-mono);
+  color: var(--cyan); margin-top: 6px;
+}
+.balance-preview {
+  padding: 9px 13px; border-radius: var(--radius-sm);
+  font-size: 12px; font-weight: 600; text-align: center; margin-top: 4px;
+}
+.balance-preview.balanced   { background: rgba(74,222,128,0.08); color: var(--green); border:1px solid rgba(74,222,128,0.2); }
+.balance-preview.unbalanced { background: rgba(245,158,11,0.08); color: var(--yellow); border:1px solid rgba(245,158,11,0.2); }
+
+/* ── Record / Undo buttons ── */
+.input-actions { display: flex; gap: 10px; }
+.input-actions .btn-secondary { flex: 0 0 auto; }
+.input-actions .btn-primary   { flex: 1; }
+
+/* ── Data table panel ── */
+.data-table-panel {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius-lg);
+  padding: 16px 18px;
+}
+.table-panel-header {
+  display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;
+}
+.table-panel-header h3 { font-size: 14px; font-weight: 700; color: var(--text-primary); }
+.readings-count { font-size: 11px; color: var(--text-muted); font-family: var(--font-mono); }
+
+.table-scroll { overflow-x: auto; max-height: 280px; overflow-y: auto; border-radius: var(--radius-md); }
+
+.data-table { width: 100%; border-collapse: collapse; font-size: 11px; font-family: var(--font-mono); }
+.data-table th {
+  background: rgba(255,255,255,0.03); color: var(--text-muted);
+  padding: 9px 10px; text-align: center; font-weight: 700;
+  position: sticky; top: 0; white-space: nowrap;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.data-table td {
+  padding: 8px 10px; text-align: center;
+  border-bottom: 1px solid rgba(255,255,255,0.04); white-space: nowrap;
+}
+.data-table .col-trial { font-weight: 700; color: var(--text-muted); }
+.data-table .col-result { color: var(--cyan); font-weight: 700; }
+
+/* Pre-drawn empty rows */
+.pre-row td { color: rgba(255,255,255,0.15) !important; font-style: italic; }
+/* Filled rows animate green flash */
+.filled-row { animation: rowFill 0.5s ease; }
+@keyframes rowFill { from { background: rgba(74,222,128,0.12); } to { background: transparent; } }
+
+/* ── Finalize area ── */
+.finalize-area { margin-top: 12px; text-align: center; }
+.finalize-status { font-size: 12px; color: var(--text-muted); margin-bottom: 10px; }
+.btn-finalize {
+  padding: 12px 28px;
+  background: linear-gradient(135deg, var(--green-dark), var(--green));
+  color: #052e16; border: none; border-radius: var(--radius-md);
+  font-size: 14px; font-weight: 700; cursor: pointer;
+  transition: all 0.2s ease;
+}
+.btn-finalize:hover {
+  box-shadow: 0 4px 20px rgba(74,222,128,0.4);
+  transform: translateY(-1px);
+}
+.btn-finalize:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+/* ── Responsive ── */
+@media (max-width: 1100px) {
+  .lab-layout { grid-template-columns: 1fr; }
+}
+@media (max-width: 700px) {
+  .lab-topbar, .question-panel, .lab-layout { padding-left: 14px; padding-right: 14px; }
+  .question-panel { margin-left: 14px; margin-right: 14px; }
+}
+
+/* ── Student calculation validation ── */
+.calc-msg         { font-size: 12px; border-radius: 6px; padding: 6px 10px; margin-top: 6px; }
+.calc-msg.correct { background: rgba(74,222,128,0.1); color: #4ade80; border: 1px solid rgba(74,222,128,0.3); }
+.calc-msg.wrong   { background: rgba(239,68,68,0.1);  color: #f87171; border: 1px solid rgba(239,68,68,0.3); }
+
+/* Correct / wrong cell highlight in data table */
+.cell-correct { color: #4ade80 !important; font-weight: 600; }
+.cell-wrong   { color: #f87171 !important; font-weight: 600; }
+
+/* Input field highlights */
+input.calc-correct { border-color: #4ade80 !important; }
+input.calc-wrong   { border-color: #f87171 !important; }

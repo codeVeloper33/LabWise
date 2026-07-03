@@ -1,0 +1,261 @@
+/* ============================================================
+   LabWise — create-experiment.css
+   3-step flow: Choose → Parameters → Review Question
+   ============================================================ */
+
+/* ── Step progress bar ── */
+.ce-progress {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 32px;
+}
+.ce-step {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+}
+.ce-step-num {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700;
+  background: var(--bg-card);
+  border: 1.5px solid var(--border);
+  color: var(--text-muted);
+  flex-shrink: 0;
+  transition: all 0.25s ease;
+  z-index: 1;
+}
+.ce-step.active .ce-step-num {
+  background: rgba(59,130,246,0.15);
+  border-color: var(--blue);
+  color: var(--blue);
+  box-shadow: 0 0 16px rgba(59,130,246,0.3);
+}
+.ce-step.done .ce-step-num {
+  background: rgba(74,222,128,0.15);
+  border-color: var(--green);
+  color: var(--green);
+}
+.ce-step-label {
+  font-size: 13px; font-weight: 600;
+  color: var(--text-muted);
+  transition: color 0.2s ease;
+}
+.ce-step.active .ce-step-label,
+.ce-step.done  .ce-step-label { color: var(--text-primary); }
+
+.ce-step-line {
+  flex: 0 0 48px;
+  height: 2px;
+  background: var(--border);
+  transition: background 0.3s ease;
+}
+.ce-step-line.done { background: var(--green); }
+
+/* ── Step panels ── */
+.ce-panel { display: none; }
+.ce-panel.active { display: block; }
+
+/* ── Step 1: Choose experiment ── */
+.ce-exp-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+.ce-exp-card {
+  background: rgba(255,255,255,0.03);
+  border: 2px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.22s ease;
+  display: flex;
+  flex-direction: column;
+}
+.ce-exp-card:hover:not(.locked) {
+  border-color: rgba(59,130,246,0.35);
+  box-shadow: 0 6px 28px rgba(59,130,246,0.14);
+  transform: translateY(-3px);
+}
+.ce-exp-card.selected {
+  border-color: var(--blue);
+  background: rgba(59,130,246,0.06);
+  box-shadow: 0 0 28px rgba(59,130,246,0.18);
+}
+.ce-exp-card.locked {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.ce-exp-card-header {
+  height: 100px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 40px;
+  position: relative;
+}
+.ce-exp-card-body { padding: 16px; flex: 1; }
+.ce-exp-card-body h3 { font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+.ce-exp-card-body p  { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+.ce-exp-card-footer {
+  padding: 10px 16px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+.ce-exp-card .lock-overlay {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(10,14,31,0.55);
+  font-size: 24px;
+}
+.ce-select-btn {
+  margin-top: 24px;
+  display: flex; justify-content: flex-end;
+}
+
+/* ── Step 2: Parameters ── */
+.ce-params-layout {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 22px;
+  align-items: start;
+}
+.ce-params-panel {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+}
+.ce-params-panel h3 { font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+.ce-params-panel .panel-desc { font-size: 12px; color: var(--text-muted); margin-bottom: 20px; }
+
+.param-field { margin-bottom: 20px; }
+.param-field:last-child { margin-bottom: 0; }
+.param-field label {
+  display: block;
+  font-size: 13px; font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+}
+.param-hint { font-size: 12px; color: var(--text-muted); margin-top: 7px; }
+.param-hint.warn { color: var(--yellow); }
+
+/* Chip group — oscillations, increment options */
+.param-chip-group {
+  display: flex; flex-wrap: wrap; gap: 8px;
+}
+.param-chip {
+  padding: 8px 16px;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--border);
+  background: rgba(255,255,255,0.02);
+  color: var(--text-secondary);
+  font-size: 13px; font-weight: 600;
+  font-family: var(--font-mono);
+  cursor: pointer;
+  transition: all 0.18s ease;
+  user-select: none;
+}
+.param-chip:hover:not(.locked-chip) {
+  border-color: rgba(59,130,246,0.3);
+  color: var(--text-primary);
+}
+.param-chip.selected {
+  background: rgba(59,130,246,0.10);
+  border-color: var(--blue);
+  color: var(--blue);
+  box-shadow: 0 0 10px rgba(59,130,246,0.15);
+}
+.param-chip.locked-chip {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+.param-chip.locked-chip::after { content: ' 🔒'; font-size: 10px; }
+
+/* ── Summary side panel ── */
+.ce-summary-panel {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  position: sticky;
+  top: 24px;
+}
+.ce-summary-panel h3 {
+  font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 14px;
+}
+.summary-row {
+  display: flex; justify-content: space-between;
+  font-size: 13px; padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.summary-row:last-of-type { border-bottom: none; }
+.summary-row span:first-child { color: var(--text-muted); }
+.summary-row span:last-child  { color: var(--text-primary); font-weight: 600; font-family: var(--font-mono); }
+
+.ce-params-actions {
+  display: flex; gap: 12px; justify-content: flex-end; margin-top: 20px;
+}
+
+/* ── Step 3: Question review ── */
+.ce-question-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius-lg);
+  padding: 30px;
+  max-width: 820px;
+}
+.ce-question-card h3 {
+  font-size: 18px; font-weight: 700;
+  color: var(--text-primary); margin-bottom: 6px;
+}
+.ce-question-eyebrow {
+  font-size: 12px; font-weight: 600;
+  color: var(--text-muted); text-transform: uppercase;
+  letter-spacing: 1px; margin-bottom: 6px;
+}
+.ce-question-formula {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 13px; color: var(--cyan);
+  background: rgba(34,211,238,0.06);
+  border: 1px solid rgba(34,211,238,0.15);
+  border-radius: var(--radius-sm);
+  padding: 6px 14px;
+  margin: 14px 0;
+}
+.ce-question-text {
+  font-size: 14px; line-height: 1.9;
+  color: var(--text-secondary);
+  white-space: pre-line;
+  margin-bottom: 28px;
+}
+.ce-question-note {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 14px 16px;
+  background: rgba(74,222,128,0.06);
+  border: 1px solid rgba(74,222,128,0.18);
+  border-radius: var(--radius-md);
+  font-size: 13px; color: var(--green);
+  margin-bottom: 24px;
+}
+.ce-question-actions {
+  display: flex; gap: 12px; justify-content: flex-end;
+}
+
+/* ── Error banner ── */
+#ce-error {
+  margin-bottom: 20px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1000px) {
+  .ce-params-layout { grid-template-columns: 1fr; }
+  .ce-summary-panel { position: static; }
+  .ce-exp-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 700px) {
+  .ce-step-label { display: none; }
+  .ce-step-line  { flex: 0 0 24px; }
+}

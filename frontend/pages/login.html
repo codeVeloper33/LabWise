@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LabWise — Sign In</title>
+  <link rel="stylesheet" href="../css/global.css"/>
+  <link rel="stylesheet" href="../css/auth.css"/>
+</head>
+<body class="auth-body">
+
+  <div class="auth-wrapper">
+
+    <!-- ── Left panel ── -->
+    <div class="auth-left">
+      <a href="index.html" class="brand">
+        <div class="brand-icon">⚗️</div>
+        <h1 class="brand-name">LabWise</h1>
+        <p class="brand-tagline">Virtual Physics Laboratory</p>
+      </a>
+
+      <div class="auth-illustration">
+        <!-- Pendulum SVG animation -->
+        <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" id="pendulum-anim">
+          <rect x="90" y="30" width="120" height="14" rx="6" fill="#4ade80" opacity="0.9"/>
+          <line id="auth-string" x1="150" y1="44" x2="150" y2="200"
+                stroke="#94a3b8" stroke-width="2.5"/>
+          <circle id="auth-bob" cx="150" cy="218" r="20"
+                  fill="#4ade80" opacity="0.9"
+                  style="filter:drop-shadow(0 0 12px rgba(74,222,128,0.5))"/>
+          <path d="M 100 200 Q 150 240 200 200"
+                stroke="#4ade80" stroke-width="1" fill="none"
+                opacity="0.25" stroke-dasharray="5,4"/>
+        </svg>
+      </div>
+
+      <div class="auth-features">
+        <div class="feature-item">
+          <span class="feature-icon">🔬</span>
+          <span>Real physics simulations</span>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">📊</span>
+          <span>Auto-generated graphs</span>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">📄</span>
+          <span>Full WAEC-style reports</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Right panel ── -->
+    <div class="auth-right">
+      <div class="auth-card">
+
+        <div class="auth-header">
+          <h2>Welcome back</h2>
+          <p>Sign in to continue to your lab</p>
+        </div>
+
+        <form id="login-form" class="auth-form" novalidate>
+
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <div class="input-wrapper">
+              <span class="input-icon">✉️</span>
+              <input type="email" id="email" name="email"
+                     placeholder="you@example.com"
+                     autocomplete="email" required/>
+            </div>
+            <span class="field-error" id="email-error"></span>
+          </div>
+
+          <div class="form-group">
+            <div class="label-row">
+              <label for="password">Password</label>
+              <a href="forgot-password.html" class="link-small">Forgot password?</a>
+            </div>
+            <div class="input-wrapper">
+              <span class="input-icon">🔒</span>
+              <input type="password" id="password" name="password"
+                     placeholder="Enter your password"
+                     autocomplete="current-password" required/>
+              <button type="button" class="toggle-password"
+                      id="toggle-password" aria-label="Show/hide password">👁️</button>
+            </div>
+            <span class="field-error" id="password-error"></span>
+          </div>
+
+          <div id="form-error" class="form-error hidden"></div>
+
+          <button type="submit" class="btn-primary btn-full" id="login-btn">
+            <span class="btn-text">Sign In</span>
+            <span class="btn-loader hidden">⏳ Signing in…</span>
+          </button>
+
+        </form>
+
+        <div class="auth-footer">
+          <p>Don't have an account? <a href="signup.html">Create one — it's free</a></p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script src="../js/utils/storage.js"></script>
+  <script src="../js/utils/router.js"></script>
+  <script src="../js/utils/validator.js"></script>
+  <script src="../js/api/authApi.js"></script>
+  <script src="../js/auth/login.js"></script>
+
+  <!-- Pendulum animation -->
+  <script>
+    (function () {
+      const string = document.getElementById('auth-string');
+      const bob    = document.getElementById('auth-bob');
+      if (!string || !bob) return;
+      const pivotX = 150, pivotY = 44, len = 174, amp = 28;
+      let start = null;
+      function frame(ts) {
+        if (!start) start = ts;
+        const angle = amp * Math.sin(((ts - start) / 1000) * 1.8);
+        const rad   = angle * Math.PI / 180;
+        const bx    = pivotX + len * Math.sin(rad);
+        const by    = pivotY + len * Math.cos(rad);
+        string.setAttribute('x2', bx); string.setAttribute('y2', by);
+        bob.setAttribute('cx', bx);    bob.setAttribute('cy', by + 18);
+        requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    })();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,325 @@
+/* ============================================================
+   LabWise — graph.css
+   Graph page styles
+   ============================================================ */
+
+/* ── Graph topbar ── */
+.graph-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 28px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.graph-topbar-left { display: flex; align-items: center; gap: 14px; }
+.graph-page-title  { font-size: 17px; font-weight: 700; color: var(--text-primary); }
+
+/* ── Graph layout: canvas | stats ── */
+.graph-layout {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 20px;
+  padding: 20px 28px 40px;
+  align-items: start;
+}
+
+/* ── Canvas card ── */
+.graph-canvas-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.graph-canvas-card h2 {
+  font-size: 15px; font-weight: 700; color: var(--text-primary);
+}
+.graph-canvas-card p {
+  font-size: 12px; color: var(--text-muted); margin-top: -8px;
+}
+#graph-canvas {
+  width: 100%;
+  border-radius: var(--radius-md);
+  background: #050c18;
+  display: block;
+}
+
+/* ── Stats + result sidebar ── */
+.graph-sidebar {
+  display: flex; flex-direction: column; gap: 16px;
+}
+
+.result-card {
+  background: linear-gradient(135deg,rgba(59,130,246,0.10),rgba(34,211,238,0.06));
+  border: 1px solid rgba(59,130,246,0.22);
+  border-radius: var(--radius-lg);
+  padding: 22px;
+  text-align: center;
+}
+.result-label {
+  font-size: 12px; font-weight: 600;
+  color: var(--text-muted); text-transform: uppercase;
+  letter-spacing: 1px; margin-bottom: 8px;
+}
+.result-value-big {
+  font-size: 38px; font-weight: 700;
+  font-family: var(--font-mono); color: var(--text-primary);
+  line-height: 1.1;
+}
+.result-unit {
+  font-size: 16px; color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+.result-uncertainty {
+  font-size: 13px; color: var(--text-muted); margin-top: 6px;
+}
+
+.graph-stat-panel {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+}
+.graph-stat-panel h3 {
+  font-size: 13px; font-weight: 700;
+  color: var(--text-primary); margin-bottom: 12px;
+}
+.graph-stat-row {
+  display: flex; justify-content: space-between;
+  font-size: 12px; padding: 7px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.graph-stat-row:last-child { border-bottom: none; }
+.graph-stat-row span:first-child { color: var(--text-muted); }
+.graph-stat-row span:last-child {
+  color: var(--text-primary); font-weight: 600;
+  font-family: var(--font-mono);
+}
+
+/* ── Graph data table ── */
+.graph-table-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  margin: 0 28px 40px;
+  overflow-x: auto;
+}
+.graph-table-card h3 {
+  font-size: 14px; font-weight: 700;
+  color: var(--text-primary); margin-bottom: 14px;
+}
+.graph-data-table {
+  width: 100%; border-collapse: collapse;
+  font-size: 12px; font-family: var(--font-mono);
+}
+.graph-data-table th {
+  text-align: center; padding: 9px 12px;
+  background: rgba(255,255,255,0.03);
+  color: var(--text-muted); font-weight: 700;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  white-space: nowrap;
+}
+.graph-data-table td {
+  text-align: center; padding: 8px 12px;
+  color: var(--text-secondary);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.graph-data-table tr:last-child td { border-bottom: none; }
+.graph-data-table .col-result { color: var(--cyan); font-weight: 700; }
+
+/* ── Action buttons ── */
+.graph-actions {
+  display: flex; gap: 12px; justify-content: flex-end;
+  padding: 0 28px 32px;
+}
+
+@media (max-width: 1000px) {
+  .graph-layout { grid-template-columns: 1fr; }
+  .graph-actions { padding: 0 14px 24px; }
+  .graph-table-card { margin: 0 14px 24px; }
+}
+
+/* ============================================================
+   LabWise — report.css
+   Full WAEC-style practical report page
+   ============================================================ */
+
+/* ── Report topbar ── */
+.report-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 28px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.report-topbar-left { display: flex; align-items: center; gap: 14px; }
+.report-topbar h1   { font-size: 16px; font-weight: 700; color: var(--text-primary); }
+.report-topbar-actions { display: flex; gap: 10px; }
+
+/* ── Report body ── */
+.report-body {
+  padding: 24px 28px 60px;
+  max-width: 900px;
+}
+
+/* Report header block */
+.report-header-block {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius-lg);
+  padding: 22px 26px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.report-header-left h2 {
+  font-size: 20px; font-weight: 700; color: var(--text-primary);
+}
+.report-header-left p {
+  font-size: 13px; color: var(--text-muted); margin-top: 3px;
+}
+.report-header-right {
+  text-align: right;
+  font-size: 12px; color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* Report section */
+.report-section {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius-lg);
+  padding: 20px 24px;
+  margin-bottom: 16px;
+}
+.report-section-title {
+  font-size: 13px; font-weight: 700;
+  color: var(--blue); text-transform: uppercase;
+  letter-spacing: 1px; margin-bottom: 10px;
+  display: flex; align-items: center; gap: 8px;
+}
+.report-section-body {
+  font-size: 14px; color: var(--text-secondary); line-height: 1.75;
+}
+.report-section-body p { color: var(--text-secondary); }
+
+/* Apparatus / precautions lists */
+.report-list {
+  list-style: none; display: flex; flex-direction: column; gap: 6px;
+}
+.report-list.numbered { counter-reset: list-counter; }
+.report-list li {
+  font-size: 13px; color: var(--text-secondary);
+  display: flex; align-items: flex-start; gap: 10px; line-height: 1.5;
+}
+.report-list li::before { content: '•'; color: var(--blue); flex-shrink: 0; }
+.report-list.numbered li { counter-increment: list-counter; }
+.report-list.numbered li::before {
+  content: counter(list-counter) '.';
+  color: var(--blue); font-weight: 700; min-width: 18px;
+}
+
+/* Formula box */
+.report-formula-box {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 14px; color: var(--cyan);
+  background: rgba(34,211,238,0.06);
+  border: 1px solid rgba(34,211,238,0.18);
+  border-radius: var(--radius-sm);
+  padding: 8px 16px; margin: 8px 0;
+}
+
+/* Diagram area */
+.report-diagram-wrap {
+  display: flex; justify-content: center;
+  padding: 10px 0;
+}
+.report-diagram-wrap svg { max-height: 220px; width: auto; }
+
+/* Report graph canvas */
+#report-graph-canvas {
+  width: 100%; border-radius: var(--radius-md);
+  background: #050c18; display: block;
+}
+.report-graph-caption {
+  font-size: 11px; color: var(--text-muted);
+  text-align: center; margin-top: 8px;
+  font-style: italic;
+}
+
+/* Calculation steps */
+.calc-steps {
+  display: flex; flex-direction: column; gap: 8px; margin-top: 6px;
+}
+.calc-step {
+  display: flex; align-items: flex-start; gap: 14px;
+  font-size: 13px;
+}
+.calc-step-label {
+  color: var(--text-muted); min-width: 90px; font-weight: 600; flex-shrink: 0;
+}
+.calc-step-val {
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+}
+.calc-step-val.highlight { color: var(--green); font-weight: 700; }
+
+/* Conclusion / result box */
+.report-result-box {
+  background: rgba(74,222,128,0.06);
+  border: 1px solid rgba(74,222,128,0.22);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  margin-top: 12px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 10px;
+}
+.report-result-label { font-size: 13px; color: var(--text-muted); }
+.report-result-value {
+  font-size: 22px; font-weight: 700;
+  font-family: var(--font-mono); color: var(--green);
+}
+.report-result-uncertainty {
+  font-size: 13px; color: var(--text-muted);
+}
+
+/* Locked report overlay */
+.report-locked {
+  text-align: center; padding: 60px 30px;
+  background: rgba(255,255,255,0.02);
+  border: 1px dashed rgba(255,255,255,0.08);
+  border-radius: var(--radius-lg);
+}
+.report-locked-icon { font-size: 48px; margin-bottom: 16px; }
+.report-locked h2   { font-size: 20px; color: var(--text-primary); margin-bottom: 8px; }
+.report-locked p    { font-size: 14px; color: var(--text-muted); margin-bottom: 20px; }
+
+/* ── Print styles ── */
+@media print {
+  .sidebar, .report-topbar, .report-topbar-actions { display: none !important; }
+  .main-content { margin-left: 0 !important; }
+  .report-body  { padding: 0; max-width: 100%; }
+  body          { background: white; color: black; }
+  .report-section { background: white; border: 1px solid #e2e8f0; }
+  .report-section-body, .report-list li, .calc-step-val {
+    color: #1e293b;
+  }
+  .report-section-title { color: #2563eb; }
+  #report-graph-canvas  { background: white; }
+}
+
+@media (max-width: 700px) {
+  .report-body, .report-topbar { padding-left: 14px; padding-right: 14px; }
+  .graph-topbar, .graph-actions { padding-left: 14px; padding-right: 14px; }
+}

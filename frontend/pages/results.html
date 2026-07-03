@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LabWise — Results</title>
+  <link rel="stylesheet" href="../css/global.css"/>
+  <link rel="stylesheet" href="../css/sidebar.css"/>
+  <link rel="stylesheet" href="../css/pages.css"/>
+</head>
+<body>
+
+  <div class="sidebar" id="sidebar"></div>
+
+  <div class="main-content">
+    <div class="page-header">
+      <h1>Results</h1>
+      <p>Your completed and in-progress experiment sessions.</p>
+    </div>
+
+    <div class="page-content">
+
+      <div class="filter-row" id="filter-row">
+        <div class="filter-chip active" data-filter="all">All</div>
+        <div class="filter-chip" data-filter="completed">Completed</div>
+        <div class="filter-chip" data-filter="in_progress">In Progress</div>
+        <div class="filter-chip" data-filter="pendulum">Pendulum</div>
+        <div class="filter-chip" data-filter="hookes">Hooke's Law</div>
+        <div class="filter-chip" data-filter="moments">Moments</div>
+      </div>
+
+      <div class="results-wrap">
+        <table class="results-table">
+          <thead>
+            <tr>
+              <th>Experiment</th>
+              <th>Date</th>
+              <th>Trials</th>
+              <th>Status</th>
+              <th>Result</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="results-tbody"></tbody>
+        </table>
+        <div class="results-empty hidden" id="results-empty">
+          <div class="results-empty-icon">📊</div>
+          <p>No sessions yet.</p>
+          <a href="create-experiment.html" class="btn-primary"
+             style="margin-top:14px;display:inline-flex;">
+            ➕ Create Experiment
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="../js/utils/storage.js"></script>
+  <script src="../js/utils/router.js"></script>
+  <script src="../js/api/authApi.js"></script>
+  <script src="../js/api/experimentApi.js"></script>
+  <script src="../js/ui/sidebar.js"></script>
+  <script src="../js/ui/results.js"></script>
+</body>
+</html>

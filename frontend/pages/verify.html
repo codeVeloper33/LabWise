@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LabWise — Verify Email</title>
+  <link rel="stylesheet" href="../css/global.css"/>
+  <link rel="stylesheet" href="../css/auth.css"/>
+</head>
+<body class="auth-body">
+
+  <div class="auth-wrapper">
+
+    <!-- ── Left panel ── -->
+    <div class="auth-left">
+      <a href="index.html" class="brand">
+        <div class="brand-icon">⚗️</div>
+        <h1 class="brand-name">LabWise</h1>
+        <p class="brand-tagline">Virtual Physics Laboratory</p>
+      </a>
+
+      <div class="auth-illustration">
+        <!-- Email / envelope SVG -->
+        <svg viewBox="0 0 300 240" xmlns="http://www.w3.org/2000/svg">
+          <rect x="40" y="50" width="220" height="140" rx="14"
+                fill="#161e38" stroke="#4ade80" stroke-width="2"/>
+          <path d="M40 64 L150 140 L260 64"
+                stroke="#4ade80" stroke-width="2.5" fill="none"
+                stroke-linecap="round" stroke-linejoin="round"/>
+          <line x1="40" y1="190" x2="100" y2="130"
+                stroke="#4ade80" stroke-width="1.5" opacity="0.4"/>
+          <line x1="260" y1="190" x2="200" y2="130"
+                stroke="#4ade80" stroke-width="1.5" opacity="0.4"/>
+          <!-- Checkmark badge -->
+          <circle cx="232" cy="52" r="26"
+                  fill="#0f172a" stroke="#4ade80" stroke-width="2.5"/>
+          <path d="M220 52 L229 62 L246 44"
+                stroke="#4ade80" stroke-width="3" fill="none"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <div class="auth-features">
+        <div class="feature-item">
+          <span class="feature-icon">📧</span>
+          <span>Check your inbox or spam folder</span>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">⏱️</span>
+          <span>Code expires in 15 minutes</span>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">🔒</span>
+          <span>Keeps your account secure</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Right panel ── -->
+    <div class="auth-right">
+      <div class="auth-card">
+
+        <div class="auth-header">
+          <h2>Verify your email</h2>
+          <p>
+            We sent a 6-digit code to
+            <span class="email-highlight" id="user-email">your email address</span>.
+            Enter it below.
+          </p>
+        </div>
+
+        <form id="verify-form" class="auth-form" novalidate>
+
+          <div class="form-group">
+            <label>Verification code</label>
+            <div class="code-input-row" id="code-inputs">
+              <input type="text" class="code-digit" maxlength="1"
+                     inputmode="numeric" pattern="[0-9]" data-index="0" aria-label="Digit 1"/>
+              <input type="text" class="code-digit" maxlength="1"
+                     inputmode="numeric" pattern="[0-9]" data-index="1" aria-label="Digit 2"/>
+              <input type="text" class="code-digit" maxlength="1"
+                     inputmode="numeric" pattern="[0-9]" data-index="2" aria-label="Digit 3"/>
+              <input type="text" class="code-digit" maxlength="1"
+                     inputmode="numeric" pattern="[0-9]" data-index="3" aria-label="Digit 4"/>
+              <input type="text" class="code-digit" maxlength="1"
+                     inputmode="numeric" pattern="[0-9]" data-index="4" aria-label="Digit 5"/>
+              <input type="text" class="code-digit" maxlength="1"
+                     inputmode="numeric" pattern="[0-9]" data-index="5" aria-label="Digit 6"/>
+            </div>
+          </div>
+
+          <div id="form-error"   class="form-error   hidden"></div>
+          <div id="form-success" class="form-success hidden"></div>
+
+          <button type="submit" class="btn-primary btn-full" id="verify-btn">
+            <span class="btn-text">Verify Email</span>
+            <span class="btn-loader hidden">⏳ Verifying…</span>
+          </button>
+
+          <div class="resend-row">
+            <span>Didn't receive a code?</span>
+            <button type="button" class="resend-btn" id="resend-btn">Resend code</button>
+            <span class="resend-timer" id="resend-timer"></span>
+          </div>
+
+        </form>
+
+        <div class="auth-footer">
+          <p><a href="login.html">← Back to login</a></p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script src="../js/utils/storage.js"></script>
+  <script src="../js/utils/router.js"></script>
+  <script src="../js/utils/validator.js"></script>
+  <script src="../js/api/authApi.js"></script>
+  <script src="../js/auth/verify.js"></script>
+</body>
+</html>

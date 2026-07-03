@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LabWise — Graph</title>
+  <link rel="stylesheet" href="../css/global.css"/>
+  <link rel="stylesheet" href="../css/sidebar.css"/>
+  <link rel="stylesheet" href="../css/graph-report.css"/>
+</head>
+<body>
+
+  <div class="sidebar" id="sidebar"></div>
+
+  <div class="main-content">
+
+    <!-- ── Topbar ── -->
+    <div class="graph-topbar">
+      <div class="graph-topbar-left">
+        <button class="lab-back-btn" onclick="history.back()">← Lab</button>
+        <h1 class="graph-page-title" id="graph-page-title">Graph</h1>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span class="lab-trial-badge" id="graph-exp-badge">—</span>
+        <a href="report.html" class="btn-primary" id="view-report-btn">
+          View Full Report →
+        </a>
+      </div>
+    </div>
+
+    <!-- ── Graph layout: canvas | sidebar ── -->
+    <div class="graph-layout">
+
+      <!-- Canvas card -->
+      <div class="graph-canvas-card">
+        <h2 id="graph-title">Graph of — against —</h2>
+        <p id="graph-subtitle">—</p>
+        <canvas id="graph-canvas" width="700" height="480"></canvas>
+      </div>
+
+      <!-- Stats sidebar -->
+      <div class="graph-sidebar">
+
+        <!-- Big result -->
+        <div class="result-card">
+          <div class="result-label" id="result-label">Result</div>
+          <div class="result-value-big" id="result-value">—</div>
+          <div class="result-unit"        id="result-unit">—</div>
+          <div class="result-uncertainty" id="result-uncertainty">± —</div>
+        </div>
+
+        <!-- Graph stats -->
+        <div class="graph-stat-panel">
+          <h3>Graph Statistics</h3>
+          <div class="graph-stat-row">
+            <span>Gradient</span>
+            <span id="stat-gradient">—</span>
+          </div>
+          <div class="graph-stat-row">
+            <span>Intercept</span>
+            <span id="stat-intercept">—</span>
+          </div>
+          <div class="graph-stat-row">
+            <span>R²</span>
+            <span id="stat-r2">—</span>
+          </div>
+          <div class="graph-stat-row">
+            <span>Data points</span>
+            <span id="stat-points">—</span>
+          </div>
+        </div>
+
+        <!-- Quick summary -->
+        <div class="graph-stat-panel" id="quick-summary-panel">
+          <h3>Quick Summary</h3>
+          <div id="quick-summary-content">—</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── Data table ── -->
+    <div class="graph-table-card">
+      <h3>📋 Readings Summary</h3>
+      <table class="graph-data-table">
+        <thead id="graph-table-head"></thead>
+        <tbody id="graph-table-body"></tbody>
+      </table>
+    </div>
+
+    <!-- ── Actions ── -->
+    <div class="graph-actions">
+      <a href="create-experiment.html" class="btn-secondary">
+        ➕ New Experiment
+      </a>
+      <a href="report.html" class="btn-primary" id="report-btn">
+        View Full Report →
+      </a>
+    </div>
+
+  </div>
+
+  <script src="../js/utils/storage.js"></script>
+  <script src="../js/utils/router.js"></script>
+  <script src="../js/api/experimentApi.js"></script>
+  <script src="../js/ui/sidebar.js"></script>
+  <script src="../js/ui/graph.js"></script>
+</body>
+</html>

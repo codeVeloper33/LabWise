@@ -1,0 +1,244 @@
+/* ============================================================
+   LabWise — sidebar.css
+
+   Persistent sidebar navigation present on every authenticated
+   page. Default: 70px (icons only). Hover: 240px (icons +
+   labels). Transition: 0.3s cubic-bezier.
+
+   CRITICAL layout rule:
+     <div class="sidebar" id="sidebar"></div>
+     <div class="main-content">...</div>
+
+   Both elements must be DIRECT SIBLINGS at the top level of
+   <body> so the CSS sibling selector works:
+     .sidebar:hover ~ .main-content { margin-left: 240px; }
+   ============================================================ */
+
+/* ── Sidebar shell ── */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 70px;
+  background: rgba(10, 14, 31, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-right: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+  overflow: hidden;
+  transition:
+    width       0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow  0.3s ease;
+}
+
+.sidebar:hover {
+  width: 240px;
+  box-shadow: 8px 0 48px rgba(59,130,246,0.15);
+}
+
+/* ── Logo / brand area ── */
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 22px 23px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.sidebar-logo:hover { text-decoration: none; }
+
+.sidebar-logo-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 8px rgba(74,222,128,0.45));
+}
+.sidebar-logo-text {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: opacity 0.22s ease 0.06s, transform 0.22s ease 0.06s;
+}
+.sidebar:hover .sidebar-logo-text {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ── Navigation menu ── */
+.sidebar-menu {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 12px 0;
+  gap: 2px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Hide scrollbar visually but keep functional */
+.sidebar-menu::-webkit-scrollbar { width: 0; }
+
+/* ── Individual menu item ── */
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 23px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  white-space: nowrap;
+  border-left: 3px solid transparent;
+  cursor: pointer;
+  position: relative;
+  transition:
+    background    0.2s ease,
+    color         0.2s ease,
+    border-color  0.2s ease,
+    box-shadow    0.2s ease;
+}
+.sidebar-item:hover {
+  background: rgba(59,130,246,0.08);
+  color: var(--text-primary);
+  border-left-color: rgba(59,130,246,0.3);
+  text-decoration: none;
+}
+/* Active page highlight */
+.sidebar-item.active {
+  background: rgba(59,130,246,0.13);
+  color: var(--blue);
+  border-left-color: var(--blue);
+  box-shadow: inset 0 0 28px rgba(59,130,246,0.12);
+}
+.sidebar-item.active .sidebar-icon {
+  filter: drop-shadow(0 0 6px rgba(59,130,246,0.55));
+}
+
+/* Icon */
+.sidebar-icon {
+  font-size: 19px;
+  flex-shrink: 0;
+  width: 24px;
+  text-align: center;
+  transition: filter 0.2s ease;
+}
+
+/* Label — hidden until sidebar is hovered */
+.sidebar-label {
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: opacity 0.2s ease 0.05s, transform 0.2s ease 0.05s;
+  pointer-events: none;
+}
+.sidebar:hover .sidebar-label {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ── User block (avatar + name + tier) ── */
+.sidebar-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 23px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.sidebar-user-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--blue), var(--green-dark));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  color: #fff;
+  flex-shrink: 0;
+  box-shadow: 0 0 14px rgba(59,130,246,0.35);
+}
+.sidebar-user-info {
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: opacity 0.2s ease 0.05s, transform 0.2s ease 0.05s;
+  overflow: hidden;
+  min-width: 0;
+}
+.sidebar:hover .sidebar-user-info {
+  opacity: 1;
+  transform: translateX(0);
+}
+.sidebar-user-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 140px;
+}
+.sidebar-user-tier {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 2px 8px;
+  border-radius: 20px;
+  display: inline-block;
+  margin-top: 3px;
+  text-transform: uppercase;
+}
+.sidebar-user-tier.tier-free  { background: rgba(148,163,184,0.12); color: var(--text-muted); }
+.sidebar-user-tier.tier-tier1 { background: rgba(59,130,246,0.12);  color: var(--blue); }
+.sidebar-user-tier.tier-tier2 { background: rgba(34,211,238,0.12);  color: var(--cyan); }
+.sidebar-user-tier.tier-tier3 { background: rgba(74,222,128,0.12);  color: var(--green); }
+
+/* ── Footer (logout only) ── */
+.sidebar-footer {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 8px 0;
+  flex-shrink: 0;
+}
+.sidebar-footer .sidebar-item:hover {
+  background: rgba(239,68,68,0.08);
+  color: var(--red);
+  border-left-color: rgba(239,68,68,0.4);
+  box-shadow: inset 0 0 20px rgba(239,68,68,0.08);
+}
+
+/* ── Main content margin adjustment ── */
+.main-content {
+  margin-left: 70px;
+  min-height: 100vh;
+  transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+/* Pure CSS: no JS needed to shift content on sidebar hover */
+.sidebar:hover ~ .main-content {
+  margin-left: 240px;
+}
+
+/* ── Mobile: sidebar stays at 60px, no expand ── */
+@media (max-width: 768px) {
+  .sidebar,
+  .sidebar:hover {
+    width: 60px;
+    box-shadow: none;
+  }
+  .sidebar-label,
+  .sidebar-logo-text,
+  .sidebar-user-info {
+    display: none;
+  }
+  .main-content,
+  .sidebar:hover ~ .main-content {
+    margin-left: 60px;
+  }
+}

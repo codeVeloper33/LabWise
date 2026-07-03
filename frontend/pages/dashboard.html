@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LabWise — Dashboard</title>
+  <link rel="stylesheet" href="../css/global.css"/>
+  <link rel="stylesheet" href="../css/sidebar.css"/>
+  <link rel="stylesheet" href="../css/dashboard.css"/>
+</head>
+<body>
+
+  <div class="sidebar" id="sidebar"></div>
+
+  <div class="main-content">
+
+    <div class="topbar">
+      <div class="topbar-greeting">
+        <h1 id="greeting">Welcome back 👋</h1>
+        <p id="greeting-sub">Here's what's happening in your lab today.</p>
+      </div>
+      <div class="topbar-actions">
+        <div class="topbar-avatar" id="topbar-avatar"
+             title="Account" onclick="window.location.href='account.html'">U</div>
+      </div>
+    </div>
+
+    <div class="dashboard-content">
+
+      <!-- Hero banner -->
+      <div class="hero-banner">
+        <div class="hero-banner-eyebrow">LabWise · Virtual Physics Lab</div>
+        <h2>Perform WAEC Physics<br/>Practicals Virtually</h2>
+        <a href="create-experiment.html" class="btn-primary btn-large">
+          ➕ Create Experiment
+        </a>
+      </div>
+
+      <!-- Stats -->
+      <section>
+        <div class="stats-row">
+          <div class="stat-glass">
+            <div class="stat-glass-num" id="stat-total">—</div>
+            <div class="stat-glass-label">Total Sessions</div>
+          </div>
+          <div class="stat-glass">
+            <div class="stat-glass-num" id="stat-completed">—</div>
+            <div class="stat-glass-label">Completed</div>
+          </div>
+          <div class="stat-glass">
+            <div class="stat-glass-num" id="stat-in-progress">—</div>
+            <div class="stat-glass-label">In Progress</div>
+          </div>
+          <div class="stat-glass">
+            <div class="stat-glass-num" id="stat-tier">Free</div>
+            <div class="stat-glass-label">Current Plan</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Recent experiments -->
+      <section>
+        <div class="section-header">
+          <h3>Recent Experiments</h3>
+          <a href="results.html" class="section-link">View all →</a>
+        </div>
+        <div class="recent-grid" id="recent-grid">
+          <div class="list-empty" id="recent-empty">
+            No experiments yet — create your first one above.
+          </div>
+        </div>
+      </section>
+
+      <!-- Available experiments -->
+      <section>
+        <div class="section-header">
+          <h3>Available Experiments</h3>
+          <a href="experiments.html" class="section-link">See all →</a>
+        </div>
+        <div class="available-grid" id="available-grid">
+          <!-- populated by dashboard.js -->
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="../js/utils/storage.js"></script>
+  <script src="../js/utils/router.js"></script>
+  <script src="../js/api/authApi.js"></script>
+  <script src="../js/api/experimentApi.js"></script>
+  <script src="../js/ui/sidebar.js"></script>
+  <script src="../js/ui/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LabWise — Settings</title>
+  <link rel="stylesheet" href="../css/global.css"/>
+  <link rel="stylesheet" href="../css/sidebar.css"/>
+  <link rel="stylesheet" href="../css/pages.css"/>
+</head>
+<body>
+
+  <div class="sidebar" id="sidebar"></div>
+
+  <div class="main-content">
+    <div class="page-header">
+      <h1>Settings</h1>
+      <p>Manage your preferences and account security.</p>
+    </div>
+
+    <div class="page-content">
+      <div class="settings-grid">
+
+        <!-- Profile card -->
+        <div class="profile-card">
+          <div class="profile-avatar" id="profile-avatar">U</div>
+          <div class="profile-name"  id="profile-name">—</div>
+          <div class="profile-email" id="profile-email">—</div>
+          <span class="profile-tier-badge tier-free" id="profile-tier-badge">Free</span>
+          <a href="upgrade.html" class="btn-secondary btn-full"
+             style="margin-top:16px;">⭐ Upgrade Plan</a>
+        </div>
+
+        <!-- Settings panels -->
+        <div class="settings-panels">
+
+          <!-- Appearance -->
+          <div class="settings-panel">
+            <h3>Appearance</h3>
+            <p class="panel-desc">Choose how LabWise looks on your device.</p>
+            <div class="theme-options" id="theme-options">
+              <div class="theme-option active" data-theme="dark">
+                <div class="theme-option-icon">🌙</div>
+                Dark
+              </div>
+              <div class="theme-option" data-theme="light">
+                <div class="theme-option-icon">☀️</div>
+                Light
+              </div>
+              <div class="theme-option" data-theme="system">
+                <div class="theme-option-icon">🖥️</div>
+                System
+              </div>
+            </div>
+          </div>
+
+          <!-- General -->
+          <div class="settings-panel">
+            <h3>General</h3>
+            <p class="panel-desc">Login and session preferences.</p>
+            <div class="settings-row">
+              <div class="settings-row-label">
+                <strong>Auto Login</strong>
+                <span>Stay signed in on this device</span>
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox" id="auto-login-toggle"/>
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Change email -->
+          <div class="settings-panel">
+            <h3>Change Email</h3>
+            <p class="panel-desc">
+              Changing your email will require re-verification.
+            </p>
+            <form id="email-form" novalidate
+                  style="display:flex;flex-direction:column;gap:14px;">
+              <div class="form-group">
+                <label for="new-email">New email address</label>
+                <input type="email" id="new-email"
+                       placeholder="new@example.com" required/>
+              </div>
+              <div id="email-msg" class="hidden"></div>
+              <button type="submit" class="btn-secondary" id="email-btn">
+                Update Email
+              </button>
+            </form>
+          </div>
+
+          <!-- Change password -->
+          <div class="settings-panel">
+            <h3>Change Password</h3>
+            <p class="panel-desc">
+              Use a strong password you don't use elsewhere.
+            </p>
+            <form id="password-form" novalidate
+                  style="display:flex;flex-direction:column;gap:14px;">
+              <div class="form-group">
+                <label for="current-password">Current password</label>
+                <input type="password" id="current-password"
+                       placeholder="••••••••" required/>
+              </div>
+              <div class="form-group">
+                <label for="new-password">New password</label>
+                <input type="password" id="new-password"
+                       placeholder="At least 6 characters" required/>
+              </div>
+              <div id="password-msg" class="hidden"></div>
+              <button type="submit" class="btn-secondary" id="password-btn">
+                Update Password
+              </button>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/utils/storage.js"></script>
+  <script src="../js/utils/router.js"></script>
+  <script src="../js/api/authApi.js"></script>
+  <script src="../js/api/userApi.js"></script>
+  <script src="../js/ui/sidebar.js"></script>
+  <script src="../js/ui/settings.js"></script>
+</body>
+</html>

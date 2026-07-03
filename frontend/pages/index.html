@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LabWise — Virtual Physics Laboratory</title>
+  <meta name="description" content="Practice WAEC/NECO physics practicals online. Simple Pendulum, Hooke's Law, Principle of Moments — with real simulations, graphs, and reports."/>
+  <link rel="stylesheet" href="../css/global.css"/>
+  <link rel="stylesheet" href="../css/landing.css"/>
+</head>
+<body class="landing-body">
+
+  <!-- ── Navbar ── -->
+  <nav class="landing-nav">
+    <a href="index.html" class="landing-nav-brand">
+      <span class="landing-nav-brand-icon">⚗️</span>
+      <span class="landing-nav-brand-name">LabWise</span>
+    </a>
+
+    <div class="landing-nav-links">
+      <a href="#features">Features</a>
+      <a href="#experiments">Experiments</a>
+      <a href="#pricing">Pricing</a>
+    </div>
+
+    <div class="landing-nav-actions">
+      <a href="login.html"  class="btn-text-link">Log in</a>
+      <a href="signup.html" class="btn-primary">Get Started Free</a>
+    </div>
+  </nav>
+
+  <!-- ── Hero ── -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">🇳🇬 Built for Nigerian Secondary School Students</div>
+
+      <h1 class="hero-title">
+        Your Physics Lab,<br/>
+        <span>without the Lab.</span>
+      </h1>
+
+      <p class="hero-subtitle">
+        Practice real WAEC and NECO physics practicals entirely online.
+        Real apparatus simulations, realistic measurement errors,
+        auto-generated graphs, and full WAEC-style reports — all in your browser.
+      </p>
+
+      <div class="hero-actions">
+        <a href="signup.html" class="btn-primary btn-large">Start for Free →</a>
+        <a href="#experiments" class="btn-secondary btn-large">See Experiments</a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-num">3</div>
+          <div class="hero-stat-label">Core Experiments</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">100%</div>
+          <div class="hero-stat-label">WAEC-Style Reports</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">₦0</div>
+          <div class="hero-stat-label">To Get Started</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero simulation card -->
+    <div class="hero-visual">
+      <div class="hero-sim-card">
+        <div class="hero-sim-label">Live Simulation — Simple Pendulum</div>
+        <svg viewBox="0 0 320 280" xmlns="http://www.w3.org/2000/svg"
+             style="background:#050c18;border-radius:10px;">
+          <!-- Support bar -->
+          <rect x="60" y="20" width="200" height="12" rx="5"
+                fill="#1e293b" stroke="#334155" stroke-width="1"/>
+          <!-- Pivot clamp -->
+          <rect x="148" y="20" width="24" height="20" rx="4" fill="#475569"/>
+          <ellipse cx="160" cy="44" rx="10" ry="5" fill="#92400e"/>
+          <!-- String + bob (animated) -->
+          <line id="hero-string" x1="160" y1="44" x2="160" y2="210"
+                stroke="#94a3b8" stroke-width="2"/>
+          <circle id="hero-bob" cx="160" cy="226" r="18"
+                  fill="#4ade80" stroke="#22c55e" stroke-width="2"
+                  style="filter:drop-shadow(0 0 10px rgba(74,222,128,0.5))"/>
+          <!-- Centre line -->
+          <line x1="160" y1="44" x2="160" y2="280"
+                stroke="#4ade80" stroke-width="1"
+                stroke-dasharray="5,5" opacity="0.15"/>
+          <!-- Arc path -->
+          <path d="M 110 210 Q 160 250 210 210"
+                stroke="#4ade80" stroke-width="1" fill="none"
+                opacity="0.2" stroke-dasharray="4,4"/>
+          <!-- Oscillation counter badge -->
+          <rect x="10" y="10" width="120" height="28" rx="6"
+                fill="rgba(15,23,42,0.85)"/>
+          <text id="hero-osc" x="18" y="29"
+                fill="#4ade80" font-size="12"
+                font-family="JetBrains Mono, monospace" font-weight="500">
+            Swings: 0
+          </text>
+          <!-- L label -->
+          <line x1="196" y1="44" x2="196" y2="210"
+                stroke="#64748b" stroke-width="1" stroke-dasharray="3"/>
+          <text x="200" y="134" fill="#64748b" font-size="12"
+                font-family="JetBrains Mono, monospace">L</text>
+          <!-- Result badge -->
+          <rect x="10" y="244" width="140" height="28" rx="6"
+                fill="rgba(15,23,42,0.85)"/>
+          <text x="18" y="263" fill="#22d3ee" font-size="12"
+                font-family="JetBrains Mono, monospace">g = 4π²L / T²</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Features ── -->
+  <section class="landing-section" id="features">
+    <h2 class="landing-section-heading">Why LabWise?</h2>
+    <p class="landing-section-sub">
+      Everything you need to practice physics practicals — without stepping into a lab.
+    </p>
+
+    <div class="features-grid">
+
+      <div class="feature-card">
+        <div class="feature-card-icon">🔬</div>
+        <h3>Real Lab Simulations</h3>
+        <p>Pendulums swing with real physics (T = 2π√L/g), springs stretch proportionally,
+           beams tilt to show moment imbalance — all responding to your inputs.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-card-icon">📐</div>
+        <h3>Realistic Error Simulation</h3>
+        <p>Every reading includes parallax error, stopwatch reaction time, and
+           instrument tolerances — just like working in a real school laboratory.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-card-icon">📊</div>
+        <h3>Auto-Generated Graphs</h3>
+        <p>Your data is plotted automatically — best-fit line, gradient, intercept,
+           and R² value included. Exactly what WAEC examiners expect.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-card-icon">📄</div>
+        <h3>Full WAEC-Style Reports</h3>
+        <p>Aim, apparatus, theory, procedure, table of results, graph, calculation,
+           precautions, sources of error, and conclusion — all generated from your data.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-card-icon">🎯</div>
+        <h3>Real Exam Questions</h3>
+        <p>Each session generates a WAEC-style question based on the parameters you
+           choose. The question stays visible throughout your experiment.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-card-icon">📱</div>
+        <h3>Works Everywhere</h3>
+        <p>No downloads, no installations. Works on your phone, tablet, or computer.
+           Practice anytime — even with a slow internet connection.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Experiments ── -->
+  <section class="landing-section" id="experiments"
+           style="background:rgba(255,255,255,0.01);
+                  border-top:1px solid rgba(255,255,255,0.04);
+                  border-bottom:1px solid rgba(255,255,255,0.04);
+                  max-width:100%;padding-left:60px;padding-right:60px;">
+    <div style="max-width:1280px;margin:0 auto;">
+      <h2 class="landing-section-heading">Available Experiments</h2>
+      <p class="landing-section-sub">
+        Three core WAEC/NECO physics practicals, fully simulated.
+      </p>
+
+      <div class="exp-preview-grid">
+
+        <div class="exp-preview-card">
+          <div class="exp-preview-header pendulum-bg">🔵</div>
+          <div class="exp-preview-body">
+            <h3>Simple Pendulum</h3>
+            <p>Vary the pendulum length across multiple trials. Time oscillations
+               with a virtual stopwatch that auto-counts. Plot T² vs L, find g.</p>
+            <div class="exp-preview-formula">g = 4π²L / T²</div>
+            <div class="exp-preview-footer">
+              <span class="tier-tag tier-free">Free Tier</span>
+              <span style="font-size:12px;color:var(--text-muted);">Graph: T² vs L</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="exp-preview-card">
+          <div class="exp-preview-header hookes-bg">🟢</div>
+          <div class="exp-preview-body">
+            <h3>Hooke's Law</h3>
+            <p>Add masses to a spring and watch it stretch in real time.
+               Read the new length, compute extension, plot F vs x, find k.</p>
+            <div class="exp-preview-formula">k = F / x</div>
+            <div class="exp-preview-footer">
+              <span class="tier-tag tier-paid">Tier 1+</span>
+              <span style="font-size:12px;color:var(--text-muted);">Graph: F vs x</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="exp-preview-card">
+          <div class="exp-preview-header moments-bg">🟡</div>
+          <div class="exp-preview-body">
+            <h3>Principle of Moments</h3>
+            <p>Balance a virtual metre rule with weights on both sides.
+               The beam tilts live to show imbalance. Plot M₂ vs M₁.</p>
+            <div class="exp-preview-formula">F₁d₁ = F₂d₂</div>
+            <div class="exp-preview-footer">
+              <span class="tier-tag tier-paid">Tier 1+</span>
+              <span style="font-size:12px;color:var(--text-muted);">Graph: M₂ vs M₁</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Pricing ── -->
+  <section class="landing-section" id="pricing">
+    <h2 class="landing-section-heading">Simple, Fair Pricing</h2>
+    <p class="landing-section-sub">
+      Start free. Upgrade when you need more experiments, trials, or reports.
+    </p>
+
+    <div class="pricing-grid">
+
+      <!-- Free -->
+      <div class="pricing-card">
+        <div class="pricing-tier-name">Free</div>
+        <div class="pricing-price">₦0<span>/forever</span></div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features-list">
+          <li class="yes">✅ Simple Pendulum only</li>
+          <li class="yes">✅ Length up to 50 cm</li>
+          <li class="yes">✅ 3 trials per session</li>
+          <li class="yes">✅ 2 sessions per month</li>
+          <li class="yes">✅ Graph included</li>
+          <li class="no">❌ Full report</li>
+          <li class="no">❌ PDF export</li>
+        </ul>
+        <a href="signup.html" class="btn-secondary btn-full">Get Started</a>
+      </div>
+
+      <!-- Tier 1 -->
+      <div class="pricing-card">
+        <div class="pricing-tier-name">Tier 1 — Basic</div>
+        <div class="pricing-price">₦500<span>/month</span></div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features-list">
+          <li class="yes">✅ All 3 experiments</li>
+          <li class="yes">✅ Length up to 100 cm</li>
+          <li class="yes">✅ 5 trials per session</li>
+          <li class="yes">✅ 10 sessions per month</li>
+          <li class="yes">✅ Basic report</li>
+          <li class="no">❌ PDF export</li>
+        </ul>
+        <a href="signup.html" class="btn-secondary btn-full">Choose Plan</a>
+      </div>
+
+      <!-- Tier 2 (featured) -->
+      <div class="pricing-card featured">
+        <div class="pricing-popular-badge">Most Popular</div>
+        <div class="pricing-tier-name">Tier 2 — Standard</div>
+        <div class="pricing-price">₦1,500<span>/month</span></div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features-list">
+          <li class="yes">✅ All 3 experiments</li>
+          <li class="yes">✅ Length up to 150 cm</li>
+          <li class="yes">✅ 8 trials per session</li>
+          <li class="yes">✅ 30 sessions per month</li>
+          <li class="yes">✅ Full report</li>
+          <li class="no">❌ PDF export</li>
+        </ul>
+        <a href="signup.html" class="btn-primary btn-full">Choose Plan</a>
+      </div>
+
+      <!-- Tier 3 -->
+      <div class="pricing-card">
+        <div class="pricing-tier-name">Tier 3 — Premium</div>
+        <div class="pricing-price">₦3,000<span>/month</span></div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features-list">
+          <li class="yes">✅ All 3 experiments</li>
+          <li class="yes">✅ Length up to 200 cm</li>
+          <li class="yes">✅ Unlimited trials</li>
+          <li class="yes">✅ Unlimited sessions</li>
+          <li class="yes">✅ Full report</li>
+          <li class="yes">✅ PDF export</li>
+        </ul>
+        <a href="signup.html" class="btn-secondary btn-full">Choose Plan</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── CTA strip ── -->
+  <section style="background:linear-gradient(135deg,#1e3a8a,#1d4ed8,#0ea5e9);
+                  padding:64px 60px;text-align:center;">
+    <h2 style="font-size:32px;font-weight:700;color:white;margin-bottom:12px;">
+      Ready to start your first experiment?
+    </h2>
+    <p style="font-size:16px;color:rgba(255,255,255,0.75);margin-bottom:28px;">
+      Create a free account in under 30 seconds.
+    </p>
+    <a href="signup.html"
+       style="display:inline-flex;align-items:center;gap:8px;
+              padding:14px 32px;background:white;color:#1e3a8a;
+              border-radius:10px;font-size:16px;font-weight:700;
+              text-decoration:none;
+              box-shadow:0 4px 20px rgba(0,0,0,0.25);
+              transition:all 0.2s ease;"
+       onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 28px rgba(0,0,0,0.3)';"
+       onmouseout="this.style.transform='';this.style.boxShadow='0 4px 20px rgba(0,0,0,0.25)';">
+      Get Started Free →
+    </a>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer class="landing-footer">
+    <div class="footer-brand">
+      <span class="footer-brand-icon">⚗️</span>
+      <span class="footer-brand-name">LabWise</span>
+    </div>
+    <p style="font-size:13px;color:var(--text-muted);">
+      Virtual Physics Laboratory for Nigerian Students
+    </p>
+    <p class="footer-copy">© 2026 LabWise. Built for WAEC &amp; NECO students.</p>
+  </footer>
+
+  <script>
+    /* ── Hero pendulum animation ── */
+    (function () {
+      const string = document.getElementById('hero-string');
+      const bob    = document.getElementById('hero-bob');
+      const oscEl  = document.getElementById('hero-osc');
+      if (!string || !bob) return;
+
+      const pivotX = 160, pivotY = 44;
+      const len    = 182;   // pixel length of string
+      const amp    = 30;    // degrees
+      // Period based on L≈80cm: T = 2π√(0.8/9.81) ≈ 1.79s
+      const period = 1790;  // ms
+
+      let start     = null;
+      let lastSign  = 1;
+      let swings    = 0;
+
+      function frame(ts) {
+        if (!start) start = ts;
+        const elapsed = ts - start;
+        const angle   = amp * Math.sin((2 * Math.PI * elapsed) / period);
+        const rad     = angle * Math.PI / 180;
+        const bx      = pivotX + len * Math.sin(rad);
+        const by      = pivotY + len * Math.cos(rad);
+
+        string.setAttribute('x2', bx.toFixed(1));
+        string.setAttribute('y2', by.toFixed(1));
+        bob.setAttribute('cx', bx.toFixed(1));
+        bob.setAttribute('cy', (by + 16).toFixed(1));
+
+        // Count swings at centre crossings
+        const sign = angle >= 0 ? 1 : -1;
+        if (sign !== lastSign) {
+          lastSign = sign;
+          swings++;
+          if (oscEl) oscEl.textContent = `Swings: ${Math.floor(swings / 2)}`;
+        }
+
+        requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    })();
+
+    /* ── Redirect logged-in users away from landing ── */
+    if (typeof Storage !== 'undefined' && Storage.isLoggedIn && Storage.isLoggedIn()) {
+      window.location.href = 'dashboard.html';
+    }
+  </script>
+
+  <script src="../js/utils/storage.js"></script>
+</body>
+</html>
