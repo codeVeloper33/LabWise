@@ -5,7 +5,7 @@
 
 const UserApi = (() => {
 
-  const BASE = 'http://localhost:5000/api/users';
+  const BASE = 'https://labwise-t1s8.onrender.com/api/users';
 
   function _headers() {
     return {
