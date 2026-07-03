@@ -5,7 +5,7 @@
 
 const ExperimentApi = (() => {
 
-  const BASE = 'http://localhost:5000/api';
+  const BASE = 'https://labwise-t1s8.onrender.com/api';;
 
   function _headers() {
     return {
