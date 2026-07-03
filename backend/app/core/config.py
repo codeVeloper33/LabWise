@@ -11,6 +11,11 @@ class Config:
     )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
+    # REQUIRED FOR RENDER POSTGRESQL SSL CONNECTION
+    SQLALCHEMY_ENGINE_OPTIONS = {
+        "connect_args": {"sslmode": "require"}
+    }
+
     # JWT
     JWT_SECRET_KEY   = os.getenv("JWT_SECRET_KEY", "fallback-secret")
     JWT_EXPIRY_HOURS = int(os.getenv("JWT_EXPIRY_HOURS", 24))
