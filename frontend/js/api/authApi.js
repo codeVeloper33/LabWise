@@ -5,7 +5,7 @@
 
 const AuthApi = (() => {
 
-  const BASE = 'http://localhost:5000/api/auth';
+  const BASE = 'https://labwise-t1s8.onrender.com/api/auth';
 
   async function _post(endpoint, body) {
     try {
