@@ -5,7 +5,7 @@
 
 const SubscriptionApi = (() => {
 
-  const BASE = 'http://localhost:5000/api/subscriptions';
+  const BASE = 'https://labwise-t1s8.onrender.com/api/subscriptions';
 
   function _headers(auth = false) {
     const h = { 'Content-Type': 'application/json' };
