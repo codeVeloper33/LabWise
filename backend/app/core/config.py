@@ -11,12 +11,17 @@ class Config:
     )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-    # --- 🟢 ADDED FOR RENDER SSL AND CONNECTION STABILITY ---
+    # --- 🟢 UPDATED SSL SETTINGS TO FIX "BAD RECORD MAC" ERROR ---
     SQLALCHEMY_ENGINE_OPTIONS = {
-        "connect_args": {"sslmode": "require"}
+        "connect_args": {
+            "sslmode": "require",
+            "sslcompression": 0,  # <--- Fixes the SSL decryption corruption
+            "target_session_attrs": "read-write"
+        }
     }
+    # Keeps the database connection alive and prevents timeouts
     SQLALCHEMY_POOL_PRE_PING = True
-    # --------------------------------------------------------
+    # -------------------------------------------------------------
 
     # JWT
     JWT_SECRET_KEY   = os.getenv("JWT_SECRET_KEY", "fallback-secret")
