@@ -11,10 +11,12 @@ class Config:
     )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-    # REQUIRED FOR RENDER POSTGRESQL SSL CONNECTION
+    # --- 🟢 ADDED FOR RENDER SSL AND CONNECTION STABILITY ---
     SQLALCHEMY_ENGINE_OPTIONS = {
         "connect_args": {"sslmode": "require"}
     }
+    SQLALCHEMY_POOL_PRE_PING = True
+    # --------------------------------------------------------
 
     # JWT
     JWT_SECRET_KEY   = os.getenv("JWT_SECRET_KEY", "fallback-secret")
